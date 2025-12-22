@@ -44,7 +44,8 @@ X_test, y_test, encoder_test, lb_test = process_data(
 
 # Train and save a model.
 rfc = train_model(X_train, y_train)
-y_pred = inference(rfc, X_test)
+rfc_best = rfc.best_estimator_
+y_pred = inference(rfc_best, X_test)
 precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
 
 # Save model and encoder
@@ -53,6 +54,6 @@ model_loc = output_loc + "model.pkl"
 encoder_loc = output_loc + "encoder.pkl"
 lb_loc = output_loc + "lb.pkl"
 
-joblib.dump(rfc, model_loc)
+joblib.dump(rfc_best, model_loc)
 joblib.dump(encoder, encoder_loc)
 joblib.dump(lb, lb_loc)
