@@ -19,7 +19,7 @@ data = pd.read_csv(data_loc)
 data.columns = data.columns.str.strip()
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
-train, test = train_test_split(data, test_size=0.20)
+train, test = train_test_split(data, test_size=0.20, random_state=42)
 
 cat_features = [
     "workclass",
