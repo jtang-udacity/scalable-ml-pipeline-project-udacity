@@ -14,7 +14,7 @@ from ml.model import train_model, compute_model_metrics, inference
 
 # Add code to load in the data.
 
-data_loc = "../data/census.csv"
+data_loc = "./data/census.csv"
 data = pd.read_csv(data_loc)
 data.columns = data.columns.str.strip()
 

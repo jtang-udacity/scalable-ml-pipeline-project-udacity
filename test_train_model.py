@@ -16,22 +16,22 @@ from ml.model import compute_model_metrics, inference
 # Pytest fixtures
 @pytest.fixture
 def data():
-    df = pd.read_csv("../data/census.csv")
+    df = pd.read_csv("./data/census.csv")
     return df
 
 @pytest.fixture
 def encoder():
-    encoder = joblib.load("../model/encoder.pkl")
+    encoder = joblib.load("./model/encoder.pkl")
     return encoder
 
 @pytest.fixture
 def lb():
-    lb = joblib.load("../model/lb.pkl")
+    lb = joblib.load("./model/lb.pkl")
     return lb
 
 @pytest.fixture
 def model():
-    model = joblib.load("../model/model.pkl")
+    model = joblib.load("./model/model.pkl")
     return model
 
 # Test 1
