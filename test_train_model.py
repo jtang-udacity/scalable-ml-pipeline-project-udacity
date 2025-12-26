@@ -106,6 +106,6 @@ def test_model(data, model, encoder, lb):
     ) 
 
     y_pred = inference(model, X)
-    precision, recall, fbeta = compute_model_metrics(y, y_pred)
+    _, _, fbeta = compute_model_metrics(y, y_pred)
 
     assert fbeta >= 0.5 

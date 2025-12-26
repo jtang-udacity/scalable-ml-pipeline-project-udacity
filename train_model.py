@@ -49,7 +49,7 @@ y_pred = inference(rfc_best, X_test)
 precision, recall, fbeta = compute_model_metrics(y_test, y_pred)
 
 # Save model and encoder
-output_loc = "../model/"
+output_loc = "./model/"
 model_loc = output_loc + "model.pkl"
 encoder_loc = output_loc + "encoder.pkl"
 lb_loc = output_loc + "lb.pkl"
