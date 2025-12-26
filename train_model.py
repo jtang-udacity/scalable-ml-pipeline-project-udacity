@@ -1,6 +1,6 @@
 # Script to train machine learning model.
 import pandas as pd
-
+import json
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 from sklearn.ensemble import RandomForestClassifier
@@ -57,3 +57,17 @@ lb_loc = output_loc + "lb.pkl"
 joblib.dump(rfc_best, model_loc)
 joblib.dump(encoder, encoder_loc)
 joblib.dump(lb, lb_loc)
+
+# Save other artifacts
+precision_loc = output_loc + "precision.json"
+recall_loc = output_loc + "recall.json"
+fbeta_loc = output_loc + "fbeta.json"
+
+with open(precision_loc, "w") as fp:
+    json.dump(precision, fp)
+
+with open(recall_loc, "w") as fp:
+    json.dump(recall, fp)
+
+with open(fbeta_loc, "w") as fp:
+    json.dump(fbeta, fp)

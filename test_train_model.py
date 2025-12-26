@@ -6,6 +6,7 @@ Author: Jason
 
 # import libraries
 import joblib
+import json
 import numpy as np
 import pandas as pd
 import pytest 
@@ -30,9 +31,10 @@ def lb():
     return lb
 
 @pytest.fixture
-def model():
-    model = joblib.load("./model/model.pkl")
-    return model
+def fbeta():
+    with open("./model/fbeta.json", "r") as f:
+        fbeta = json.load(f)
+    return fbeta
 
 # Test 1
 '''
@@ -79,33 +81,6 @@ def test_process_data(data, encoder, lb):
 '''
 Test to confirm model output meets minimal performance requirements 
 '''
-def test_model(data, model, encoder, lb):
-
-    cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-    ]
-    
-    data.columns = data.columns.str.strip()
-
-    train, test = train_test_split(data, test_size=0.20, random_state=42)
-    
-    X, y, _, _ = process_data(
-        data,
-        categorical_features=cat_features,
-        label="salary",
-        training=False,
-        encoder=encoder,
-        lb=lb,
-    ) 
-
-    y_pred = inference(model, X)
-    _, _, fbeta = compute_model_metrics(y, y_pred)
+def test_model(fbeta):
 
     assert fbeta >= 0.5 
