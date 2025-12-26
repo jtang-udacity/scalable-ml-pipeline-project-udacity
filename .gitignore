@@ -161,6 +161,7 @@ tensorboard/
 .Trashes
 ehthumbs.db
 Thumbs.db
+*:Zone.Identifier
 
 # Heroku specific
 .env.local
