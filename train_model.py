@@ -54,7 +54,7 @@ model_loc = output_loc + "model.pkl"
 encoder_loc = output_loc + "encoder.pkl"
 lb_loc = output_loc + "lb.pkl"
 
-joblib.dump(rfc_best, model_loc)
+joblib.dump(rfc_best, model_loc, compress=("xz", 3))
 joblib.dump(encoder, encoder_loc)
 joblib.dump(lb, lb_loc)
 
