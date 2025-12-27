@@ -22,6 +22,15 @@ cat_features = [
     "native-country",
 ]
 
+cont_features = [
+    "age",
+    "fnlgt",
+    "education-num",
+    "capital-gain",
+    "capital-loss",
+    "hours-per-week",
+]
+
 app = FastAPI()
 
 
