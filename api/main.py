@@ -6,7 +6,6 @@ from typing import Dict
 from sys import exit
 
 from fastapi import FastAPI
-import pandas as pd
 
 from api.schemas import PredictPayload
 from ml.data import process_data
@@ -43,7 +42,7 @@ async def say_hello():
 
 @app.post("/predict")
 async def predict(payload: PredictPayload) -> Dict:
-
+    import pandas as pd
     data = pd.DataFrame(payload.dict(by_alias=True), index=[0])
     X, _, _, _ = process_data(
         data,
