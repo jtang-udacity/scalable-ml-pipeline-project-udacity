@@ -4,6 +4,7 @@ from joblib import load
 import os
 from typing import Dict
 from sys import exit
+import numpy as np
 
 from fastapi import FastAPI
 
@@ -42,16 +43,28 @@ async def say_hello():
 
 @app.post("/predict")
 async def predict(payload: PredictPayload) -> Dict:
-    import pandas as pd
-    data = pd.DataFrame(payload.dict(by_alias=True), index=[0])
-    X, _, _, _ = process_data(
-        data,
-        categorical_features=cat_features,
-        label=None,
-        training=False,
-        encoder=encoder,
-        lb=lb,
+    # Convert payload → dict using original (hyphenated) feature names
+    data = payload.dict(by_alias=True)
+
+    # Build continuous feature array (1 row)
+    X_continuous = np.array(
+        [[data[f] for f in cont_features]],
+        dtype=float
     )
+
+    # Build categorical feature array (1 row)
+    X_categorical = np.array(
+        [[data[f] for f in cat_features]],
+        dtype=object
+    )
+
+    # Apply trained encoder
+    X_cat_encoded = encoder.transform(X_categorical)
+
+    # Concatenate continuous + encoded categorical
+    X = np.concatenate([X_continuous, X_cat_encoded], axis=1)
+    
+    # Run inference
     preds = inference(model, X)
     label = lb.inverse_transform(preds)[0]
 
