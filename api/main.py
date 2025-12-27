@@ -9,7 +9,6 @@ import numpy as np
 from fastapi import FastAPI
 
 from api.schemas import PredictPayload
-from ml.data import process_data
 from ml.model import inference
 
 cat_features = [
